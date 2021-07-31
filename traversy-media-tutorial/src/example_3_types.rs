@@ -30,16 +30,18 @@ pub fn run() {
 
     // display all ranges sizes
     println!("\nINTEGERS");
-    println!("  u8: {} to {}", std::u8::MIN, std::u8::MAX);
-    println!("  i8: {} to {}", std::i8::MIN, std::i8::MAX);
-    println!(" u16: {} to {}", std::u16::MIN, std::u16::MAX);
-    println!(" i16: {} to {}", std::i16::MIN, std::i16::MAX);
-    println!(" u32: {} to {}", std::u32::MIN, std::u32::MAX);
-    println!(" i32: {} to {}", std::i32::MIN, std::i32::MAX);
-    println!(" u64: {} to {}", std::u64::MIN, std::u64::MAX);
-    println!(" i64: {} to {}", std::i64::MIN, std::i64::MAX);
-    println!("u128: {} to {}", std::u128::MIN, std::u128::MAX);
-    println!("i128: {} to {}", std::i128::MIN, std::i128::MAX);
+    println!("isize: {} to {}", std::isize::MIN, std::isize::MAX);
+    println!("usize: {} to {}", std::usize::MIN, std::usize::MAX);
+    println!("   i8: {} to {}", std::i8::MIN, std::i8::MAX);
+    println!("   u8: {} to {}", std::u8::MIN, std::u8::MAX);
+    println!("  i16: {} to {}", std::i16::MIN, std::i16::MAX);
+    println!("  u16: {} to {}", std::u16::MIN, std::u16::MAX);
+    println!("  i32: {} to {}", std::i32::MIN, std::i32::MAX);
+    println!("  u32: {} to {}", std::u32::MIN, std::u32::MAX);
+    println!("  i64: {} to {}", std::i64::MIN, std::i64::MAX);
+    println!("  u64: {} to {}", std::u64::MIN, std::u64::MAX);
+    println!(" i128: {} to {}", std::i128::MIN, std::i128::MAX);
+    println!(" u128: {} to {}", std::u128::MIN, std::u128::MAX);
     println!("\nFLOATS (❌❌❌ THIS DOES NOT WORK ❌❌❌)");
     println!("f32: {} to {}", std::f32::MIN, std::f32::MAX);
     println!("f64: {} to {}", std::f64::MIN, std::f64::MAX);
