@@ -1,4 +1,6 @@
 pub fn run() {
+    println!("=== PRINTLN ===");
+
     // Print to console
     println!("Hello from the example_1_print.rs file");
 
