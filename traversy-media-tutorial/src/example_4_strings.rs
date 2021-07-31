@@ -36,4 +36,8 @@ pub fn run() {
     s.push('a');
     s.push('b');
     println!("CREATE STRING WITH CAPACITY {}: \ns = '{}'", capacity, s);
+
+    // Assertion testiong
+    assert_eq!(s.len(), 2);
+    assert_eq!(s.capacity(), capacity);
 }
