@@ -3,7 +3,8 @@
 // mod example_2_vars;
 // mod example_3_types;
 // mod example_4_strings;
-mod example_5_tuples;
+// mod example_5_tuples;
+mod example_6_arrays;
 
 fn main() {
     // testing::run();
@@ -11,6 +12,7 @@ fn main() {
     // example_2_vars::run();
     // example_3_types::run();
     // example_4_strings::run();
-    example_5_tuples::run();
+    // example_5_tuples::run();
+    example_6_arrays::run();
 }
 
