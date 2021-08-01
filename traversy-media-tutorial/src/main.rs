@@ -9,7 +9,8 @@
 // mod example_08_conditionals;
 // mod example_09_loops;
 // mod example_10_functions;
-mod example_11_ref_pointers;
+// mod example_11_ref_pointers;
+mod example_12_structs;
 
 fn main() {
     // testing::run();
@@ -23,6 +24,7 @@ fn main() {
     // example_08_conditionals::run();
     // example_09_loops::run();
     // example_10_functions::run();
-    example_11_ref_pointers::run();
+    // example_11_ref_pointers::run();
+    example_12_structs::run();
 }
 
