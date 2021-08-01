@@ -10,7 +10,8 @@
 // mod example_09_loops;
 // mod example_10_functions;
 // mod example_11_ref_pointers;
-mod example_12_structs;
+// mod example_12_structs;
+mod example_13_enums;
 
 fn main() {
     // testing::run();
@@ -25,6 +26,7 @@ fn main() {
     // example_09_loops::run();
     // example_10_functions::run();
     // example_11_ref_pointers::run();
-    example_12_structs::run();
+    // example_12_structs::run();
+    example_13_enums::run();
 }
 
