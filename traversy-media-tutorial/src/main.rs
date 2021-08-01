@@ -6,7 +6,8 @@
 // mod example_5_tuples;
 // mod example_6_arrays;
 // mod example_7_vectors;
-mod example_8_conditionals;
+// mod example_8_conditionals;
+mod example_9_loops;
 
 fn main() {
     // testing::run();
@@ -17,6 +18,7 @@ fn main() {
     // example_5_tuples::run();
     // example_6_arrays::run();
     // example_7_vectors::run();
-    example_8_conditionals::run();
+    // example_8_conditionals::run();
+    example_9_loops::run();
 }
 
