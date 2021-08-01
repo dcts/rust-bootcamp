@@ -10,13 +10,6 @@ pub fn run() {
     // get single value
     println!("third fibonacci number: {}", fibonacci[2]);
 
-    // iterate
-    let mut index: u8 = 0;
-    for val in fibonacci {
-        println!("index {}: {}", index, val);
-        index += 1;
-    }
-
     // re-assign value
     let mut numbers: Vec<i32> = vec![1,2,3,4,5];
     println!("original vector  : {:?}", numbers);
@@ -37,8 +30,24 @@ pub fn run() {
     println!("extended vector  : {:?}", numbers);
     println!("Vector occupies  : {} bytes (after push)", mem::size_of_val(&numbers));
 
+    // pop vectors
+    numbers.pop();
+
     // slice vector
     let slice: &[i32] = &numbers[0..2];
     println!("Slice: {:?}", slice);
 
+    // loop through vector values
+    let mut index: u8 = 0;
+    for val in numbers.iter() {
+        println!("index {}: {}", index, val);
+        index += 1;
+    }
+
+    // loop and mutate through values
+    println!("{:?}", numbers);
+    for val in numbers.iter_mut() {
+        *val *= -2;
+    }
+    println!("{:?}", numbers);
 }
