@@ -17,3 +17,8 @@ Folders explained
 
 ![Bildschirmfoto vom 2021-07-31 02-37-33](https://user-images.githubusercontent.com/44790691/127734954-5d6d6086-5222-47f0-981c-d7158b89d4ae.png)
 ![Bildschirmfoto vom 2021-07-31 02-00-47](https://user-images.githubusercontent.com/44790691/127734962-fc37340d-7b3d-486f-8a4f-ee668ea56a3d.png)
+
+# Small Project Idea:
+create CLI tool that displays the current price of a given cryptocurrency in the terminal (with ASCII aret showing the logo). Example: `cprice hot` => return logo and current price in ASCII art
+
+

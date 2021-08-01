@@ -11,7 +11,8 @@
 // mod example_10_functions;
 // mod example_11_ref_pointers;
 // mod example_12_structs;
-mod example_13_enums;
+// mod example_13_enums;
+mod example_14_cli;
 
 fn main() {
     // testing::run();
@@ -27,6 +28,7 @@ fn main() {
     // example_10_functions::run();
     // example_11_ref_pointers::run();
     // example_12_structs::run();
-    example_13_enums::run();
+    // example_13_enums::run();
+    example_14_cli::run();
 }
 
