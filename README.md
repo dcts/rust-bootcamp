@@ -4,7 +4,7 @@ Folders explained
 - **traversy-media-tutorial**: all learnings from [this video](https://www.youtube.com/watch?v=zF34dRivLOw)
 - **rust-by-example**: all excercises from [RUST BY EXAMPLE](https://doc.rust-lang.org/rust-by-example/)
 - **rustbook_2_guessing-game-cli**: Rustbook chapter 2
-- **rustbook_3_guessing-game-cli**: Rustbook chapter 3 (variables)
+- **rustbook_3_variables**: Rustbook chapter 3 (variables)
 - **somple-excercises**: self created rewriting of simple javascript functions
 
 ### Join our Rust Bootcamp 🚀
