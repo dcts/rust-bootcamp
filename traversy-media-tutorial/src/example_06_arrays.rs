@@ -3,6 +3,8 @@ use std::mem;
 // Arrays => List with fixed length where elements are the same data types
 // arrays are stack allocated
 
+// ARRAY STRANGENESS:
+// https://www.reddit.com/r/rust/comments/330tu1/array_slice_strangeness/
 
 pub fn run() {
     println!("=== ARRAYS ===");
