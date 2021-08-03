@@ -7,6 +7,10 @@ pub fn run() {
     move_avatar(Movement::Right);
 }
 
+// if you want to be able to print the value to the console
+// with the debug trait "{:?}", then you need to add this line
+// on top of the enum declaration
+#[derive(Debug)]
 enum Movement {
     // Variants
     Up,

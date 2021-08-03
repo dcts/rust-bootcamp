@@ -46,6 +46,10 @@ struct Color {
 // Tuple Struct
 struct ColorSimple(u8, u8, u8);
 
+// if you want to be able to print the struct to the console
+// with the debug trait "{:?}", then you need to add this line
+// on top of the enum declaration
+#[derive(Debug)]
 // Struct with functions
 struct Person {
     first_name: String,
@@ -76,3 +80,4 @@ impl Person {
         (self.first_name, self.last_name, self.age)
     }
 }
+
