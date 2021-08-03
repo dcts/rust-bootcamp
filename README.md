@@ -17,6 +17,8 @@ Folders explained
 
 ![Bildschirmfoto vom 2021-07-31 02-37-33](https://user-images.githubusercontent.com/44790691/127734954-5d6d6086-5222-47f0-981c-d7158b89d4ae.png)
 ![Bildschirmfoto vom 2021-07-31 02-00-47](https://user-images.githubusercontent.com/44790691/127734962-fc37340d-7b3d-486f-8a4f-ee668ea56a3d.png)
+
+# Just started learning rust, and I cannot even reverse an array... always remember:
 ![image](https://user-images.githubusercontent.com/44790691/127950852-005994c2-1692-4860-a145-ca527743d566.png)
 
 # Small Project Idea:
