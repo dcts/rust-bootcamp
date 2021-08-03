@@ -7,19 +7,43 @@ const EMPTY: char = '░';
 const MIN: u8 = 0;
 const MAX: u8 = 30;
 
-const SLEEP_TIME: u64 = 100;
+const SLEEP_TIME: u64 = 35;
 
 pub fn run(size: u8) {
     println!("=== BUBBLE SORT ===");
     println!("size of vector to sort: {}", size);
 
-    let mut target = generate_random_vector(size);
-    for x in 1..=100 {
-        println!("\n\n\n\n\n\n\n\n\n\n\nITERATION:{}", x);
-        display_vector(&target);
-        target = generate_random_vector(size);
-        sleep();
+    let target = generate_random_vector(size);
+
+    bubble_sort(target.clone());
+}
+
+fn bubble_sort(mut target: Vec<u8>) {
+    let mut iteration_count = 0;
+    let mut done: bool = false;
+    while done == false {
+        done = true;
+        for indx in 0..target.len()-1-iteration_count {
+            println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            println!("ŘUNNING ITERATION {}_{}", iteration_count, indx);
+            if target[indx] > target[indx+1] {
+                let lower_value: u8 = target[indx+1];
+                target[indx+1] = target[indx];
+                target[indx] = lower_value;
+                done = false;
+            }
+            display_vector(&target);
+            println!("\n");
+            sleep();
+        }
+        iteration_count += 1;
     }
+    // FINISHED
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("🎉 FINISHED 🎉");
+    display_vector(&target);
+    println!("\n");
+
 }
 
 fn generate_random_vector(size: u8) -> Vec<u8> {
@@ -37,6 +61,7 @@ fn display_vector(vector: &Vec<u8>) {
         display_line(value.clone());
     }
 }
+
 fn display_line(num: u8) {
     // create string to append
     let mut line = String::from("");

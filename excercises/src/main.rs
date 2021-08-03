@@ -2,5 +2,5 @@
 
 fn main() {
     println!("Hello, world!");
-    bubble_sort::run(10);
+    bubble_sort::run(20);
 }
