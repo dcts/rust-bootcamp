@@ -5,7 +5,7 @@ Folders explained
 - **rust-by-example**: all excercises from [RUST BY EXAMPLE](https://doc.rust-lang.org/rust-by-example/)
 - **rustbook_2_guessing-game-cli**: Rustbook chapter 2
 - **rustbook_3_variables**: Rustbook chapter 3 (variables)
-- **somple-excercises**: self created rewriting of simple javascript functions
+- **excercises**: self created excercises to train syntax and problem solving in rust. Find all excercises [here](https://ubiquitous-dandelion-895.notion.site/Session-2-7-8-2021-8-16h-UTC-Rustlings-and-Excercises-dad6c1e3dd3445d49d94de7893587cc3).
 
 ### Join our Rust Bootcamp 🚀
 - **Notion**: https://ubiquitous-dandelion-895.notion.site/Rust-Bootcamp-04b8ddd8f8494c4daa7dcc64f6ab90d9
