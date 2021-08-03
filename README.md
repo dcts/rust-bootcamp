@@ -19,7 +19,7 @@ Folders explained
 ![Bildschirmfoto vom 2021-07-31 02-00-47](https://user-images.githubusercontent.com/44790691/127734962-fc37340d-7b3d-486f-8a4f-ee668ea56a3d.png)
 
 # Just started learning rust, and I cannot even reverse an array... always remember:
-![image](https://user-images.githubusercontent.com/44790691/127950852-005994c2-1692-4860-a145-ca527743d566.png)
+![Bildschirmfoto vom 2021-08-03 05-02-15](https://user-images.githubusercontent.com/44790691/127950942-0a2dcb44-a824-4d8a-b362-cd09343ea9aa.png)
 
 # Small Project Idea:
 create CLI tool that displays the current price of a given cryptocurrency in the terminal (with ASCII aret showing the logo). Example: `cprice hot` => return logo and current price in ASCII art
