@@ -7,7 +7,7 @@ const EMPTY: char = '░';
 const MIN: u8 = 0;
 const MAX: u8 = 30;
 
-const SLEEP_TIME: u64 = 50000;
+const SLEEP_TIME: u64 = 75;
 
 pub fn run(size: u8) {
     println!("=== BUBBLE SORT ===");
@@ -45,13 +45,6 @@ fn bubble_sort(mut target: Vec<u8>) {
     println!("\n");
 }
 
-fn print_huge_gap() {
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-}
 
 fn generate_random_vector(size: u8) -> Vec<u8> {
     // initialize vector
