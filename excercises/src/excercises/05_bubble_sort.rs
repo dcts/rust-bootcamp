@@ -24,7 +24,7 @@ fn bubble_sort(mut target: Vec<u8>) {
     while done == false {
         done = true;
         for indx in 0..target.len()-1-iteration_count {
-            println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            print_huge_gap();
             println!("ŘUNNING ITERATION {}_{}", iteration_count, indx);
             if target[indx] > target[indx+1] {
                 let lower_value: u8 = target[indx+1];
@@ -39,11 +39,19 @@ fn bubble_sort(mut target: Vec<u8>) {
         iteration_count += 1;
     }
     // FINISHED
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    print_huge_gap();
     println!("🎉 FINISHED 🎉");
     display_vector(&target);
     println!("\n");
 
+}
+
+fn print_huge_gap() {
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
 
 fn generate_random_vector(size: u8) -> Vec<u8> {
