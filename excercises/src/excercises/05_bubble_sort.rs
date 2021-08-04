@@ -45,6 +45,14 @@ fn bubble_sort(mut target: Vec<u8>) {
     println!("\n");
 }
 
+fn print_huge_gap() {
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+}
+
 fn generate_random_vector(size: u8) -> Vec<u8> {
     // initialize vector
     let mut random_vector: Vec<u8> = vec![];
