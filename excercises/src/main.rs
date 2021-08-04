@@ -3,7 +3,7 @@
 #[path = "excercises/03_enums.rs"] mod enums;
 #[path = "excercises/04_collatz.rs"] mod collatz;
 #[path = "excercises/05_bubble_sort.rs"] mod bubble_sort;
-#[path = "excercises/06_blackjack.rs"] mod blackjack;
+#[path = "excercises/06_blackjack/game.rs"] mod blackjack;
 #[path = "excercises/07_game_of_life.rs"] mod game_of_life;
 use std::env;
 
@@ -22,9 +22,11 @@ fn main() {
         collatz::run();
     } else if command == "bubble" {
         bubble_sort::run(20);
-    } else if command == "blackjack" {
+    } else if command == "blackjack" || command == "bj" {
         blackjack::run();
     } else if command == "game_of_life" || command == "gol" {
         game_of_life::run();
+    } else {
+        blackjack::run();
     }
 }
