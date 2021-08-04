@@ -11,12 +11,17 @@ pub fn run() {
     let mut dealer_cards: Vec<Card> = vec![];
     dealer_cards.push(pick_card());
     dealer_cards.push(pick_card());
-    // println!("{:?}", dealer_cards);
-    // println!("{}", dealer_cards[0].to_string());
-    // println!("{}", dealer_cards[1].to_string());
-    // let dealer_score = compute_score(dealer_cards);
-    // println!("dealer score: {}", dealer_score);
+    let dealer_score = compute_score(&dealer_cards);
+    println!("Dealer Score: {}", dealer_score);
     print_cards(dealer_cards);
+
+    // Player cards
+    let mut player_cards: Vec<Card> = vec![];
+    player_cards.push(pick_card());
+    player_cards.push(pick_card());
+    let player_score = compute_score(&player_cards);
+    println!("Player Score: {}", player_score);
+    print_cards(player_cards);
 }
 
 #[derive(Debug)]
@@ -138,7 +143,7 @@ fn pick_color() -> Color {
 fn pick_card() -> Card {
     Card::new(pick_value(), pick_color())
 }
-fn compute_score(cards: Vec<Card>) -> u8 {
+fn compute_score(cards: &Vec<Card>) -> u8 {
     let mut score = 0;
     for card in cards.iter() {
         let card_score: u8 = match card.value {
