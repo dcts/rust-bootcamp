@@ -33,3 +33,14 @@ fn main() {
 let mut split = "some string 123 ffd".split("123");
 let vec: Vec<&str> = split.collect();
 ```
+
+
+### Functions
+- no default values possible
+
+### Nesting Types
+- you can for example get a vector of vectors of i32... ()
+
+### How to plan your functions
+- always think in terms of input => output (functional programming)
+- always think in types, what is actually returned?
