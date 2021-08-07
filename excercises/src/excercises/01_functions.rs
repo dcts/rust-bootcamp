@@ -1,5 +1,6 @@
 pub fn run() {
     println!("=== FUNCTIONS ===");
+    // EXCERCISE 1.A reverse string
     println!("=== reverse_original_string ===");
     let mut s: String = String::from("Hello World");
     println!("s (before call): {}", s);
@@ -20,6 +21,15 @@ pub fn run() {
     let s3_new: String = reverse_string_by_cloning_str_slice(s3_str_slice);
     println!("s3 (after call)    : {}", s3);
     println!("s3_new (after call): {}", s3_new);
+
+    // EXCERCISE 1.B reverse string
+    println!("\n=== MAX ===");
+    let (x1, x2) = (-122387,124);
+    println!("max of {} and {} is {}", x1, x2, max(x1,x2));
+    let (x1, x2) = (-125,-2);
+    println!("max of {} and {} is {}", x1, x2, max(x1,x2));
+    let (x1, x2) = (142,2);
+    println!("max of {} and {} is {}", x1, x2, max(x1,x2));
 }
 
 /*
@@ -52,7 +62,6 @@ fn reverse_string_by_cloning_str_slice(s: &str) -> String {
     s.clone().chars().rev().collect::<String>()
 }
 
-
 /*
  * COMPARISON Rust with Javascript
  */
@@ -61,3 +70,11 @@ fn reverse_string_by_cloning_str_slice(s: &str) -> String {
 //      => garbage collector
 // RUST => Memory is direclty freed.
 //      => Developer can reassign memory with shadowwing, which is not possible in JS
+
+/*
+ * MAX OF 2 NUMBERS
+ * => return new value
+ */
+fn max(x: i32, y: i32) -> i32 {
+    if x > y { x } else { y }
+}
