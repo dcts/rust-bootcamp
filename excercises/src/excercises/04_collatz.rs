@@ -27,3 +27,27 @@ fn collatz_next_number(input: i32) -> i32 {
     }
     next_number
 }
+
+
+// fn collatz_next_number_recursive(input: i32, sequence: Vec<i32>) -> Vec<i32> {
+//     match input {
+//         4 => 2,
+//         2 => 1,
+//         1 => ,
+//         _ => collatz_next_number_recursive(input, sequence)
+//     }
+// }
+
+
+/*
+ * Example recursive function taken from here:
+ * https://www.programming-idioms.org/idiom/31/recursive-factorial-simple/450/rust
+ *
+ *
+ */
+fn factorial(num: u64) -> u64 {
+    match num {
+        0 | 1 => 1,
+        _ => factorial(num - 1) * num,
+    }
+}
