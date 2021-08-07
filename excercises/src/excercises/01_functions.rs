@@ -40,17 +40,25 @@ pub fn run() {
     my_arr.sort();
     println!("     original array (after sorting: {:?}", my_arr);
 
-    println!("(2) sort_vector (return new vector, drop old vector)");
+    println!("(2) sort_vector_drop_original (return new vector, drop old vector)");
     let vec_1: Vec<i32> = vec![1,42,514,2,3,156,28];
     println!("     original vector              : {:?}", vec_1);
-    let vec_1_sorted: Vec<i32> = sort_vector(vec_1);
+    let vec_1_sorted: Vec<i32> = sort_vector_drop_original(vec_1);
     println!("     original vector (after sort) : 🚧 will not compile, because value was moved (=dropped)");
     println!("     sorted_vec                   : {:?}", vec_1_sorted);
 
+    println!("(3) sort_vector (leave original => pass mutable reference instead of original value)");
+    let mut vec_2: Vec<i32> = vec![1,42,514,2,3,156,28];
+    println!("     original vector              : {:?}", vec_2);
+    let vec_2_sorted: Vec<i32> = sort_vector(&mut vec_2);
+    println!("     original vector (after sort) : {:?}", vec_2);
+    println!("     sorted_vec                   : {:?}", vec_2_sorted);
 
-    // println!("(3) sort_vector (return new vector, leave old value untouched)");
-    // println!("(4) sort_vector_in_place (do not return anything)");
-    //
+    println!("(4) sort_vector_in_place (do not return anything)");
+    let mut vec_3: Vec<i32> = vec![1,42,514,2,3,156,28];
+    println!("     original vector              : {:?}", vec_3);
+    sort_vector_in_place(&mut vec_3);
+    println!("     original vector (after sort) : {:?}", vec_3);
 
 }
 
@@ -111,7 +119,7 @@ fn max(x: i32, y: i32) -> i32 {
  * => thats why I chose to use a vector instead
  * => returns new Vector, DROPS original value
  */
-fn sort_vector(my_vec: Vec<i32>) -> Vec<i32> {
+fn sort_vector_drop_original(my_vec: Vec<i32>) -> Vec<i32> {
     let mut sorted_vector: Vec<i32> = vec![];
     for val in my_vec.iter() {
         if sorted_vector.len() == 0 {
@@ -128,12 +136,13 @@ fn sort_vector(my_vec: Vec<i32>) -> Vec<i32> {
  * => does not drop original value, because we input a mutable reference
  *    (original vector is borrowed and NOT destroyed at the end)
  */
-fn sort_vector_drop_original(my_vec: &mut Vec<i32>) -> Vec<i32> {
+fn sort_vector(my_vec: &mut Vec<i32>) -> Vec<i32> {
     let mut sorted_vector: Vec<i32> = vec![];
     for val in my_vec.iter() {
         if sorted_vector.len() == 0 {
             sorted_vector.push(*val);
         } else {
+            if (sorted_vecor[sorted_vector.len()])
             prepend_to_vec(&mut sorted_vector, *val);
         }
     }
@@ -143,7 +152,7 @@ fn sort_vector_drop_original(my_vec: &mut Vec<i32>) -> Vec<i32> {
 // HELPER FUNCTION TO PUSH TO BEGINNING OF A VECTOR
 fn prepend_to_vec(my_vec: &mut Vec<i32>, value: i32) {
     let mut start_vec: Vec<i32> = vec![value];
-    start_vec.append(my_vec);
+    start_vec.append(&mut my_vec);
 }
 /*
  * SORT VECTOR (IN PLACE => manipulate original array)
