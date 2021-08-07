@@ -3,6 +3,13 @@ pub fn run() {
     println!("{:?}", collatz(5));  // results in 4,2,1 end loop
     println!("{:?}", collatz(12)); // results in 4,2,1 end loop
     println!("{:?}", collatz(-5)); // results in a negative loop
+
+    println!("\n=== COLLATZ CONJECTURE RECURSIVE (3x+1) ===");
+    for x in -10..=10 {
+        let mut list: Vec<i64> = Vec::new();
+        collatz_recursive(x, &mut list);
+        println!("collatz of {}: {:?}", x, &mut list);
+    }
 }
 
 fn collatz(seed: i32) -> Vec<i32> {
@@ -42,12 +49,24 @@ fn collatz_next_number(input: i32) -> i32 {
 /*
  * Example recursive function taken from here:
  * https://www.programming-idioms.org/idiom/31/recursive-factorial-simple/450/rust
- *
- *
  */
-fn factorial(num: u64) -> u64 {
-    match num {
-        0 | 1 => 1,
-        _ => factorial(num - 1) * num,
+// fn factorial(num: u64) -> u64 {
+//     match num {
+//         0 | 1 => 1,
+//         _ => factorial(num - 1) * num,
+//     }
+// }
+fn collatz_recursive(num: i64, list: &mut Vec<i64>) {
+    let exists: bool = list.contains(&num);
+    match exists {
+        true => {}
+        false => {
+            list.push(num);
+            let even: bool = num % 2 == 0;
+            match even {
+                true => collatz_recursive(num / 2, list),
+                false => collatz_recursive(3 * num + 1, list),
+            }
+        }
     }
 }
