@@ -20,34 +20,34 @@ pub fn run() {
         if choice == "d" {
             game.player_draw_card();
             print_game_state_with_hidden_card(&game);
-            if game.player_score() > 21 {
+            if game.player_score > 21 {
                 print_game_end(&game, "❌ BUSTED ❌");
                 break;
             }
 
         } else if choice == "s" {
             // check if dealer has won
-            if game.dealer_score() > game.player_score() {
+            if game.dealer_score > game.player_score {
                 print_game_end(&game, "❌ YOU LOST ❌");
                 break;
-            } else if game.dealer_score() == game.player_score() {
+            } else if game.dealer_score == game.player_score {
                 print_game_end(&game, "✋ It's a DRAW ✋");
                 break;
             } else {
                 print_game_state(&game, "👀 Dealer revealer his hidden card...\n...\n...");
-                while game.dealer_score() < game.player_score() {
+                while game.dealer_score < game.player_score {
                     // wait 1 sec
                     sleep();
                     // take another card and display
                     game.dealer_draw_card();
                     // check endgame conditions
-                    if game.dealer_score() > 21 {
+                    if game.dealer_score > 21 {
                         print_game_end(&game, "🎉 YOU WON 🎉");
                         break;
-                    } else if game.dealer_score() == game.player_score() {
+                    } else if game.dealer_score == game.player_score {
                         print_game_end(&game, "✋ It's a DRAW ✋");
                         break;
-                    } else if game.dealer_score() > game.player_score() {
+                    } else if game.dealer_score > game.player_score {
                         print_game_end(&game, "❌ YOU LOST ❌");
                         break;
                     }
@@ -123,14 +123,6 @@ impl Game {
             score -= 10
         }
         score
-    }
-
-    fn player_score(&self) -> u8 {
-        Game::compute_score(&self.player_cards)
-    }
-
-    fn dealer_score(&self) -> u8 {
-        Game::compute_score(&self.dealer_cards)
     }
 }
 
@@ -268,15 +260,15 @@ fn print_game_state_with_hidden_card(game: &Game) {
     print_title();
     println!("Dealer Score: ?");
     print_cards_hidden(&game.dealer_cards);
-    println!("Player Score: {}", game.player_score());
+    println!("Player Score: {}", game.player_score);
     print_cards(&game.player_cards);
 }
 
 fn print_game_state(game: &Game, message: &str) {
     print_title();
-    println!("Dealer Score: {}", game.dealer_score());
+    println!("Dealer Score: {}", game.dealer_score);
     print_cards(&game.dealer_cards);
-    println!("Player Score: {}", game.player_score());
+    println!("Player Score: {}", game.player_score);
     print_cards(&game.player_cards);
     println!("{}", message);
 }
@@ -284,14 +276,14 @@ fn print_game_state(game: &Game, message: &str) {
 fn print_game_end(game: &Game, final_message: &str) {
     // print game status to console
     print_title();
-    println!("Dealer Score: {}", game.dealer_score());
+    println!("Dealer Score: {}", game.dealer_score);
     print_cards(&game.dealer_cards);
-    println!("Player Score: {}", game.player_score());
+    println!("Player Score: {}", game.player_score);
     print_cards(&game.player_cards);
 
     // to make the end status have the same dimensions
     // as an ongoing game I am adding some random lines
-    println!("{}\n- Your score is {}\n- The Dealer's score is {}", final_message, game.player_score(), game.dealer_score());
+    println!("{}\n- Your score is {}\n- The Dealer's score is {}", final_message, game.player_score, game.dealer_score);
     print!("> press any key to exit");
     io::stdout().flush().unwrap();
     let mut choice = String::new();
@@ -352,7 +344,7 @@ fn print_cards_hidden(cards: &Vec<Card>) {
 
 // INTEACTION INTERFACE
 fn prompt_for_user_action(game: &Game) -> String {
-    println!("Your score is {}. What do you like to do?\n- draw another card (d)\n- stop (s)", game.player_score());
+    println!("Your score is {}. What do you like to do?\n- draw another card (d)\n- stop (s)", game.player_score);
     print!("> ");
     io::stdout().flush().unwrap();
     let mut choice = String::new();
