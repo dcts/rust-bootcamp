@@ -133,7 +133,7 @@ pub fn run() {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Card {
     value: Value,
     color: Color,
@@ -195,8 +195,7 @@ impl Card {
     }
 }
 
-#[derive(Debug)]
-#[derive(PartialEq)]
+#[derive(Debug, PartialEq, Clone)]
 enum Value {
     Two,
     Three,
@@ -231,7 +230,7 @@ fn pick_value() -> Value {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 enum Color {
     Heart,
     Diamond,
@@ -253,6 +252,7 @@ fn pick_card() -> Card {
 }
 fn compute_score(cards: &Vec<Card>) -> u8 {
     let mut score = 0;
+    let mut contains_ace: bool = false;
     for card in cards.iter() {
         let card_score: u8 = match card.value {
             Value::Two => 2,
@@ -267,9 +267,15 @@ fn compute_score(cards: &Vec<Card>) -> u8 {
             Value::Jack => 10,
             Value::Queen => 10,
             Value::King => 10,
-            Value::Ace => 11,
+            Value::Ace => {
+                contains_ace = true;
+                11
+            },
         };
         score += card_score;
+    }
+    if score > 21 && contains_ace {
+        score -= 10
     }
     score
 }
