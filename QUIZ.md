@@ -44,9 +44,10 @@ fn some_func(a_string: String) -> String {
 - (C) mutable String and immutable String
 
 ### 3) How do you convert a variable `my_string` of type String to a string slice?
-- (A) let str_slice = my_string.to_slice
-- (B) let str_slice = &my_string[..];
-- (C) let str_slice: &str = my_string;
+- (A) let str_slice = my_string.to_slice()
+- (B) let str_slice = &my_string;
+- (C) let str_slice = &my_string[..];
+- (D) let str_slice: &str = my_string;
 
 ### 4) Where is the "hello world" data stored?
 ```rust

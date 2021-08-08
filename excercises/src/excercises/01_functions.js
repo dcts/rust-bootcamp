@@ -35,3 +35,11 @@ function createDict(arr) {
   });
   return dict;
 }
+
+function multiplyByX(arr, x) {
+  return arr.map(val => val * x);
+}
+
+function findValue(arr, x) {
+  return arr.find(val => val === x);
+}
