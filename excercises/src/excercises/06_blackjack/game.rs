@@ -52,32 +52,17 @@ pub fn run() {
             println!("Player Score: {}", player_score);
             print_cards(&player_cards);
             if player_score > 21 {
-                print_title();
-                println!("Dealer Score: {}", dealer_score);
-                print_cards(&dealer_cards);
-                println!("Player Score: {}", player_score);
-                print_cards(&player_cards);
-                print_game_end(dealer_score, player_score, "❌ BUSTED ❌".to_string());
+                print_game_end(dealer_score, player_score, dealer_cards, player_cards, "❌ BUSTED ❌");
                 break;
             }
 
         } else if choice == "s" {
             // check if dealer has won
             if dealer_score > player_score {
-                print_title();
-                println!("Dealer Score: {}", dealer_score);
-                print_cards(&dealer_cards);
-                println!("Player Score: {}", player_score);
-                print_cards(&player_cards);
-                print_game_end(dealer_score, player_score, "❌ YOU LOST ❌".to_string());
+                print_game_end(dealer_score, player_score, dealer_cards, player_cards, "❌ YOU LOST ❌");
                 break;
             } else if dealer_score == player_score {
-                print_title();
-                println!("Dealer Score: {}", dealer_score);
-                print_cards(&dealer_cards);
-                println!("Player Score: {}", player_score);
-                print_cards(&player_cards);
-                print_game_end(dealer_score, player_score, "✋ It's a DRAW ✋".to_string());
+                print_game_end(dealer_score, player_score, dealer_cards, player_cards, "✋ It's a DRAW ✋");
                 break;
             } else {
                 print_title();
@@ -94,28 +79,13 @@ pub fn run() {
                     dealer_score = compute_score(&dealer_cards);
                     // check endgame conditions
                     if dealer_score > 21 {
-                        print_title();
-                        println!("Dealer Score: {}", dealer_score);
-                        print_cards(&dealer_cards);
-                        println!("Player Score: {}", player_score);
-                        print_cards(&player_cards);
-                        print_game_end(dealer_score, player_score, "🎉 YOU WON 🎉".to_string());
+                        print_game_end(dealer_score, player_score, dealer_cards, player_cards, "🎉 YOU WON 🎉");
                         break;
                     } else if dealer_score == player_score {
-                        print_title();
-                        println!("Dealer Score: {}", dealer_score);
-                        print_cards(&dealer_cards);
-                        println!("Player Score: {}", player_score);
-                        print_cards(&player_cards);
-                        print_game_end(dealer_score, player_score, "✋ It's a DRAW ✋".to_string());
+                        print_game_end(dealer_score, player_score, dealer_cards, player_cards, "✋ It's a DRAW ✋");
                         break;
                     } else if dealer_score > player_score {
-                        print_title();
-                        println!("Dealer Score: {}", dealer_score);
-                        print_cards(&dealer_cards);
-                        println!("Player Score: {}", player_score);
-                        print_cards(&player_cards);
-                        print_game_end(dealer_score, player_score, "❌ YOU LOST ❌".to_string());
+                        print_game_end(dealer_score, player_score, dealer_cards, player_cards, "❌ YOU LOST ❌");
                         break;
                     }
                     print_title();
@@ -330,17 +300,15 @@ fn print_cards_hidden(cards: &Vec<Card>) {
 fn sleep() {
     thread::sleep(time::Duration::from_millis(SLEEP_TIME));
 }
-fn print_title() {
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("=== BLACKJACK ===");
-}
-// fn print_game_board(player_cards: Vec<Card>, dealer_cards: Vec<Card> )
-fn print_game_end(dealer_score: u8, player_score: u8, status: String) {
-    println!("{}\n- Your score is {}\n- The Dealer's score is {}", status, player_score, dealer_score);
+fn print_game_end(dealer_score: u8, player_score: u8, dealer_cards: Vec<Card>, player_cards: Vec<Card>, final_message: &str) {
+    // print game status to console
+    print_title();
+    println!("Dealer Score: {}", dealer_score);
+    print_cards(&dealer_cards);
+    println!("Player Score: {}", player_score);
+    print_cards(&player_cards);
+
+    println!("{}\n- Your score is {}\n- The Dealer's score is {}", final_message, player_score, dealer_score);
     print!("> press any key to exit");
     io::stdout().flush().unwrap();
     let mut choice = String::new();
@@ -349,4 +317,13 @@ fn print_game_end(dealer_score: u8, player_score: u8, status: String) {
         .read_line(&mut choice)
         .expect("Failed to read input");
     println!("...exiting");
+}
+
+fn print_title() {
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("=== BLACKJACK ===");
 }
