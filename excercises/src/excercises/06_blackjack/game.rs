@@ -3,103 +3,134 @@ use std::io;
 use std::io::Write;
 use std::{thread, time};
 
-// 1,5 seconds wait time for dealer
-const SLEEP_TIME: u64 = 1000;
-
-// use termion::color;
-// use termion::style;
-// let str = format!("{}Red{}Green", color::Fg(color::Red), color::Fg(color::White));
-// let str2 = format!("{}Red{}{}Bold", color::Fg(color::Red), color::Fg(color::White), style::Bold);
+// 1,5 seconds wait time for dealer (for the graphics "engige")
+const SLEEP_TIME: u64 = 1500;
 
 pub fn run() {
-    // Bank initial cards
-    let mut dealer_cards: Vec<Card> = vec![];
-    dealer_cards.push(pick_card());
-    dealer_cards.push(pick_card());
-    let mut dealer_score = compute_score(&dealer_cards);
-    print_title();
-    println!("Dealer Score: ?");
-    print_cards_hidden(&dealer_cards);
+    // create new Game
+    let mut game: Game = Game::new();
 
-    // Player cards
-    let mut player_cards: Vec<Card> = vec![];
-    player_cards.push(pick_card());
-    player_cards.push(pick_card());
-    let mut player_score = compute_score(&player_cards);
-    println!("Player Score: {}", player_score);
-    print_cards(&player_cards);
+    // display initial game state
+    print_game_state_with_hidden_card(&game);
 
-    // while
+    // endgame condition breaks loop
     loop {
         // prompt user action
-        println!("Your score is {}. What do you like to do?\n- draw another card (d)\n- stop (s)", player_score);
-        print!("> ");
-        io::stdout().flush().unwrap();
-        let mut choice = String::new();
-
-        io::stdin()
-            .read_line(&mut choice)
-            .expect("Failed to read input");
-
-        let choice = choice.trim();
+        let choice: String = prompt_for_user_action(&game);
         if choice == "d" {
-            player_cards.push(pick_card());
-            print_title();
-
-            println!("Dealer Score: ?");
-            print_cards_hidden(&dealer_cards);
-            player_score = compute_score(&player_cards);
-            println!("Player Score: {}", player_score);
-            print_cards(&player_cards);
-            if player_score > 21 {
-                print_game_end(dealer_score, player_score, dealer_cards, player_cards, "❌ BUSTED ❌");
+            game.player_draw_card();
+            print_game_state_with_hidden_card(&game);
+            if game.player_score() > 21 {
+                print_game_end(&game, "❌ BUSTED ❌");
                 break;
             }
 
         } else if choice == "s" {
             // check if dealer has won
-            if dealer_score > player_score {
-                print_game_end(dealer_score, player_score, dealer_cards, player_cards, "❌ YOU LOST ❌");
+            if game.dealer_score() > game.player_score() {
+                print_game_end(&game, "❌ YOU LOST ❌");
                 break;
-            } else if dealer_score == player_score {
-                print_game_end(dealer_score, player_score, dealer_cards, player_cards, "✋ It's a DRAW ✋");
+            } else if game.dealer_score() == game.player_score() {
+                print_game_end(&game, "✋ It's a DRAW ✋");
                 break;
             } else {
-                print_title();
-                println!("Dealer Score: {}", dealer_score);
-                print_cards(&dealer_cards);
-                println!("Player Score: {}", player_score);
-                print_cards(&player_cards);
-                println!("👀 Dealer revealer his hidden card...\n...\n...");
-                while dealer_score < player_score {
+                print_game_state(&game, "👀 Dealer revealer his hidden card...\n...\n...");
+                while game.dealer_score() < game.player_score() {
                     // wait 1 sec
                     sleep();
                     // take another card and display
-                    dealer_cards.push(pick_card());
-                    dealer_score = compute_score(&dealer_cards);
+                    game.dealer_draw_card();
                     // check endgame conditions
-                    if dealer_score > 21 {
-                        print_game_end(dealer_score, player_score, dealer_cards, player_cards, "🎉 YOU WON 🎉");
+                    if game.dealer_score() > 21 {
+                        print_game_end(&game, "🎉 YOU WON 🎉");
                         break;
-                    } else if dealer_score == player_score {
-                        print_game_end(dealer_score, player_score, dealer_cards, player_cards, "✋ It's a DRAW ✋");
+                    } else if game.dealer_score() == game.player_score() {
+                        print_game_end(&game, "✋ It's a DRAW ✋");
                         break;
-                    } else if dealer_score > player_score {
-                        print_game_end(dealer_score, player_score, dealer_cards, player_cards, "❌ YOU LOST ❌");
+                    } else if game.dealer_score() > game.player_score() {
+                        print_game_end(&game, "❌ YOU LOST ❌");
                         break;
                     }
-                    print_title();
-                    println!("Dealer Score: {}", dealer_score);
-                    print_cards(&dealer_cards);
-                    println!("Player Score: {}", player_score);
-                    print_cards(&player_cards);
-                    println!("🃏 Dealer has grabbed another card... \n...\n...");
+                    print_game_state(&game, "🃏 Dealer has grabbed another card... \n...\n...");
                 }
                 break;
             }
         } else {
             println!("(INVALID INPUT)");
         }
+    }
+}
+
+struct Game {
+    dealer_cards: Vec<Card>,
+    dealer_score: u8,
+    player_cards: Vec<Card>,
+    player_score: u8,
+}
+impl Game {
+    fn new() -> Game {
+        // initial bank cards
+        let mut dealer_cards: Vec<Card> = Vec::new();
+        dealer_cards.push(Card::random());
+        dealer_cards.push(Card::random());
+        let dealer_score: u8 = Game::compute_score(&dealer_cards);
+        // initial player cards
+        let mut player_cards: Vec<Card> = Vec::new();
+        player_cards.push(Card::random());
+        player_cards.push(Card::random());
+        let player_score: u8 = Game::compute_score(&player_cards);
+        // return randomly initialized game state
+        Game {
+            dealer_cards: dealer_cards,
+            dealer_score: dealer_score,
+            player_cards: player_cards,
+            player_score: player_score,
+        }
+    }
+    fn player_draw_card(&mut self) {
+        self.player_cards.push(Card::random());
+        self.player_score = Game::compute_score(&self.player_cards);
+    }
+    fn dealer_draw_card(&mut self) {
+        self.dealer_cards.push(Card::random());
+        self.dealer_score = Game::compute_score(&self.dealer_cards);
+    }
+    fn compute_score(cards: &Vec<Card>) -> u8 {
+        let mut score = 0;
+        let mut contains_ace: bool = false;
+        for card in cards.iter() {
+            let card_score: u8 = match card.value {
+                Value::Two => 2,
+                Value::Three => 3,
+                Value::Four => 4,
+                Value::Five => 5,
+                Value::Six => 6,
+                Value::Seven => 7,
+                Value::Eight => 8,
+                Value::Nine => 9,
+                Value::Ten => 10,
+                Value::Jack => 10,
+                Value::Queen => 10,
+                Value::King => 10,
+                Value::Ace => {
+                    contains_ace = true;
+                    11
+                },
+            };
+            score += card_score;
+        }
+        if score > 21 && contains_ace {
+            score -= 10
+        }
+        score
+    }
+
+    fn player_score(&self) -> u8 {
+        Game::compute_score(&self.player_cards)
+    }
+
+    fn dealer_score(&self) -> u8 {
+        Game::compute_score(&self.dealer_cards)
     }
 }
 
@@ -116,6 +147,36 @@ impl Card {
             color: color,
         }
     }
+    fn random() -> Card {
+        // pick random value
+        let random_value: Value = match rand::thread_rng().gen_range(2..=14) {
+            2 => Value::Two,
+            3 => Value::Three,
+            4 => Value::Four,
+            5 => Value::Five,
+            6 => Value::Six,
+            7 => Value::Seven,
+            8 => Value::Eight,
+            9 => Value::Nine,
+            10 => Value::Ten,
+            11 => Value::Jack,
+            12 => Value::Queen,
+            13 => Value::King,
+            14 => Value::Ace,
+            _ => panic!("Randomly generated value is out of bound. Allowed 2-14."),
+        };
+        // pick random color
+        let random_color: Color = match rand::thread_rng().gen_range(0..=3) {
+            0 => Color::Heart,
+            1 => Color::Diamond,
+            2 => Color::Spade,
+            3 => Color::Club,
+            _ => panic!("Randomly generated value is out of bound. Allowed 0-3."),
+        };
+        // return card with randomly picked value and color
+        Card::new(random_value, random_color)
+    }
+
     fn to_string(&self) -> String {
         let card_draft = "┌─────┐\n\
                                │v    |\n\
@@ -128,7 +189,6 @@ impl Card {
             card_string = card_string.replace("v ", self.value_char());
             card_string = card_string.replace(" v", self.value_char());
         } else {
-            card_string = card_string.replace("v", self.value_char());
             card_string = card_string.replace("v", self.value_char());
         }
         // inject color
@@ -181,24 +241,6 @@ enum Value {
     King,
     Ace,
 }
-fn pick_value() -> Value {
-    match rand::thread_rng().gen_range(2..=14) {
-        2 => Value::Two,
-        3 => Value::Three,
-        4 => Value::Four,
-        5 => Value::Five,
-        6 => Value::Six,
-        7 => Value::Seven,
-        8 => Value::Eight,
-        9 => Value::Nine,
-        10 => Value::Ten,
-        11 => Value::Jack,
-        12 => Value::Queen,
-        13 => Value::King,
-        14 => Value::Ace,
-        _ => panic!("Randomly generated value is out of bound. Allowed 2-14."),
-    }
-}
 
 #[derive(Debug, Clone)]
 enum Color {
@@ -207,47 +249,57 @@ enum Color {
     Spade,
     Club,
 }
-fn pick_color() -> Color {
-    match rand::thread_rng().gen_range(0..=3) {
-        0 => Color::Heart,
-        1 => Color::Diamond,
-        2 => Color::Spade,
-        3 => Color::Club,
-        _ => panic!("Randomly generated value is out of bound. Allowed 0-3."),
-    }
+
+// GRAPHICS "ENGINE"
+fn sleep() {
+    thread::sleep(time::Duration::from_millis(SLEEP_TIME));
 }
 
-fn pick_card() -> Card {
-    Card::new(pick_value(), pick_color())
+fn print_title() {
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    println!("=== BLACKJACK ===");
 }
-fn compute_score(cards: &Vec<Card>) -> u8 {
-    let mut score = 0;
-    let mut contains_ace: bool = false;
-    for card in cards.iter() {
-        let card_score: u8 = match card.value {
-            Value::Two => 2,
-            Value::Three => 3,
-            Value::Four => 4,
-            Value::Five => 5,
-            Value::Six => 6,
-            Value::Seven => 7,
-            Value::Eight => 8,
-            Value::Nine => 9,
-            Value::Ten => 10,
-            Value::Jack => 10,
-            Value::Queen => 10,
-            Value::King => 10,
-            Value::Ace => {
-                contains_ace = true;
-                11
-            },
-        };
-        score += card_score;
-    }
-    if score > 21 && contains_ace {
-        score -= 10
-    }
-    score
+
+fn print_game_state_with_hidden_card(game: &Game) {
+    print_title();
+    println!("Dealer Score: ?");
+    print_cards_hidden(&game.dealer_cards);
+    println!("Player Score: {}", game.player_score());
+    print_cards(&game.player_cards);
+}
+
+fn print_game_state(game: &Game, message: &str) {
+    print_title();
+    println!("Dealer Score: {}", game.dealer_score());
+    print_cards(&game.dealer_cards);
+    println!("Player Score: {}", game.player_score());
+    print_cards(&game.player_cards);
+    println!("{}", message);
+}
+
+fn print_game_end(game: &Game, final_message: &str) {
+    // print game status to console
+    print_title();
+    println!("Dealer Score: {}", game.dealer_score());
+    print_cards(&game.dealer_cards);
+    println!("Player Score: {}", game.player_score());
+    print_cards(&game.player_cards);
+
+    // to make the end status have the same dimensions
+    // as an ongoing game I am adding some random lines
+    println!("{}\n- Your score is {}\n- The Dealer's score is {}", final_message, game.player_score(), game.dealer_score());
+    print!("> press any key to exit");
+    io::stdout().flush().unwrap();
+    let mut choice = String::new();
+    // prompt user to press any key to exit program
+    io::stdin()
+        .read_line(&mut choice)
+        .expect("Failed to read input");
+    println!("...exiting");
 }
 
 fn print_cards(cards: &Vec<Card>) {
@@ -276,6 +328,7 @@ fn print_cards(cards: &Vec<Card>) {
     }
     println!("{}",final_string);
 }
+
 fn print_cards_hidden(cards: &Vec<Card>) {
     let cards_draft = "┌─────┐┌─────┐\n\
                             │░░░░░|│v    |\n\
@@ -297,33 +350,16 @@ fn print_cards_hidden(cards: &Vec<Card>) {
     println!("{}", cards_string);
 }
 
-fn sleep() {
-    thread::sleep(time::Duration::from_millis(SLEEP_TIME));
-}
-fn print_game_end(dealer_score: u8, player_score: u8, dealer_cards: Vec<Card>, player_cards: Vec<Card>, final_message: &str) {
-    // print game status to console
-    print_title();
-    println!("Dealer Score: {}", dealer_score);
-    print_cards(&dealer_cards);
-    println!("Player Score: {}", player_score);
-    print_cards(&player_cards);
-
-    println!("{}\n- Your score is {}\n- The Dealer's score is {}", final_message, player_score, dealer_score);
-    print!("> press any key to exit");
+// INTEACTION INTERFACE
+fn prompt_for_user_action(game: &Game) -> String {
+    println!("Your score is {}. What do you like to do?\n- draw another card (d)\n- stop (s)", game.player_score());
+    print!("> ");
     io::stdout().flush().unwrap();
     let mut choice = String::new();
 
     io::stdin()
         .read_line(&mut choice)
         .expect("Failed to read input");
-    println!("...exiting");
-}
 
-fn print_title() {
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    println!("=== BLACKJACK ===");
+    choice.trim().to_string()
 }
