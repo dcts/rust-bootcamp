@@ -1,8 +1,14 @@
 pub fn run() {
     println!("=== STRUCTS ===");
     println!("generate person:");
-    let p: Person = Person::new("frakie","miller", 30);
-    println!("{:?}", p);
+    let mut p: Person = Person::new("frakie","miller", 30);
+    p.print();
+    p.happy_birthday();
+    p.happy_birthday();
+    p.print();
+    p.set_last_name("Rogan");
+    p.print();
+    println!("p.to_string() : {}", p.to_string());
 }
 
 #[derive(Debug)]
@@ -28,7 +34,7 @@ impl Person {
     fn happy_birthday(&mut self) {
         self.age += 1;
     }
-    fn set_last_name(&mut self, new_last_name: String) {
-        self.last_name = new_last_name;
+    fn set_last_name(&mut self, new_last_name: &str) {
+        self.last_name = new_last_name.to_string();
     }
 }
