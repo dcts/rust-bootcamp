@@ -10,6 +10,15 @@ pub fn run() {
         collatz_recursive(x, &mut list);
         println!("collatz of {}: {:?}", x, &mut list);
     }
+
+    println!("\n\nTESTING: \n");
+    println!("{:?}", collatz(4));
+    println!("{:?}", collatz(5));
+    println!("{:?}", collatz(6));
+    println!("{:?}", collatz(7));
+    println!("{:?}", collatz(8));
+    println!("{:?}", collatz(10));
+    println!("{:?}", collatz(20));
 }
 
 /*
