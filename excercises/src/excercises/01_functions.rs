@@ -70,6 +70,8 @@ pub fn run() {
 
     // EXCERCISE 1.F chunk an array into an array of arrays
     println!("\n=== (F) CHUNK ARRAY INTO ARRAY CHUNKS ===");
+    let vec: Vec<usize> = vec![1,2,3,4,5,6,7,8,9,10];
+    println!("vec: {:?} => chunks: {:?}", vec, chunk_vector(&vec, 3));
 
     // EXCERCISE 1.G createDict out of array
     println!("\n=== (G) CREATE DICT (count occurencies) ===");
@@ -194,7 +196,23 @@ fn sum(vector: &Vec<i32>) -> i32 {
     sum
 }
 
-
+/*
+ * CHUNK ARRAY (into batches of size n)
+ */
+fn chunk_vector(vec: &Vec<usize>, size: usize) -> Vec<Vec<usize>> {
+    let mut chunks: Vec<Vec<usize>> = Vec::new();
+    let mut indx: usize = 0;
+    while indx < vec.len() {
+        let mut chunk: Vec<usize> = Vec::new();
+        while chunk.len() < size && indx < vec.len() {
+            chunk.push(vec[indx]);
+            indx += 1;
+        }
+        chunks.push(chunk.clone());
+        println!("{}", indx);
+    }
+    chunks
+}
 
 /*
  * MULTIPLY ARRAY ELEMENTS BY X
