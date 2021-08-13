@@ -8,6 +8,13 @@ pub fn run() {
     let person_2: Person = Person::new("Alice","Wonderland", 30, Gender::Female);
     person_1.greet();
     person_2.greet();
+
+    println!("\n=== (B) Date ===");
+    let d = Date::new("2021-08-02");
+    println!("formatted_date_str: {}", d.get_formatted_date_str()); // => "2. August 2021"
+    println!("formatted_date_str: {}", d.get_date_str()); // => "2021-08-02"
+    println!("unix              : {}", d.get_unix()); // => 1627862400
+    println!("get_season        : {}", d.get_season()); // => Summer
 }
 
 #[derive(Debug)]
@@ -61,14 +68,33 @@ enum Gender {
 struct Date {
     date_str: String,
     unix_timestamp: i64,
+    month: Month,
+    season: Season,
 }
 impl Date {
     fn new(date_str: &str) -> Date {
         let (year, month, day) = Date::date_str_to_ymd(date_str);
         let d = NaiveDate::from_ymd(year, month, day);
+        let (month_enum, season_enum): (Month, Season) = match month {
+            1 => (Month::January, Season::Winter),
+            2 => (Month::February, Season::Winter),
+            3 => (Month::March, Season::Spring),
+            4 => (Month::April, Season::Spring),
+            5 => (Month::May, Season::Spring),
+            6 => (Month::June, Season::Summer),
+            7 => (Month::July, Season::Summer),
+            8 => (Month::August, Season::Summer),
+            9 => (Month::September, Season::Autumn),
+            10 => (Month::October, Season::Autumn),
+            11 => (Month::November, Season::Autumn),
+            12 => (Month::December, Season::Winter),
+            _ => panic!("Invalid date_str entered. Got: {}", date_str),
+        };
         Date {
             date_str: date_str.to_string(),
             unix_timestamp: d.and_hms(0, 0, 0).timestamp(),
+            month: month_enum,
+            season: season_enum,
         }
     }
     fn get_unix(&self) -> i64 {
@@ -78,22 +104,8 @@ impl Date {
         self.date_str.clone()
     }
     fn get_formatted_date_str(&self) -> String {
-        let (year, month, day) = Date::date_str_to_ymd(&self.date_str);
-        let month_name: String = match month {
-            1 => "January".to_string(),
-            2 => "February".to_string(),
-            3 => "March".to_string(),
-            4 => "April".to_string(),
-            5 => "May".to_string(),
-            6 => "June".to_string(),
-            7 => "July".to_string(),
-            8 => "August".to_string(),
-            9 => "September".to_string(),
-            10 => "October".to_string(),
-            11 => "November".to_string(),
-            12 => "December".to_string(),
-            _ => panic!("Invalid date_str entered. Got: {}", self.date_str),
-        };
+        let (year, _, day) = Date::date_str_to_ymd(&self.date_str);
+        let month_name: String = format!("{:?}",self.month);
         // return formatted string
         format!("{}. {} {}", day, month_name, year)
     }
@@ -106,5 +118,30 @@ impl Date {
         let day: u32 = date_split[2].parse::<u32>().unwrap();
         (year, month, day)
     }
+    fn get_season(&self) -> String {
+        format!("{:?}", self.season)
+    }
+}
+#[derive(Debug)]
+enum Month {
+    January,
+    February,
+    March,
+    April,
+    May,
+    June,
+    July,
+    August,
+    September,
+    October,
+    November,
+    December,
 }
 
+#[derive(Debug)]
+enum Season {
+    Winter,
+    Summer,
+    Spring,
+    Autumn,
+}
