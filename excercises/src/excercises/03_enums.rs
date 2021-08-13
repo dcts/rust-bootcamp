@@ -4,8 +4,10 @@ pub fn run() {
     println!("=== ENUMS ===");
     println!("=== (A) PERSON ===");
     // println!("generate person:");
-    let p: Person = Person::new("frakie","miller", 30, Gender::Male);
-    p.greet();
+    let person_1: Person = Person::new("Frakie","Miller", 30, Gender::Male);
+    let person_2: Person = Person::new("Alice","Wonderland", 30, Gender::Female);
+    person_1.greet();
+    person_2.greet();
 }
 
 #[derive(Debug)]
@@ -24,18 +26,18 @@ impl Person {
             gender: gender,
         }
     }
-    fn print(&self) {
-        println!("{} {} is {} years old.", self.first_name, self.last_name, self.age);
-    }
-    fn to_string(&self) -> String {
-        format!("{} {} is {} years old.", self.first_name, self.last_name, self.age)
-    }
-    fn happy_birthday(&mut self) {
-        self.age += 1;
-    }
-    fn set_last_name(&mut self, new_last_name: &str) {
-        self.last_name = new_last_name.to_string();
-    }
+    // fn print(&self) {
+    //     println!("{} {} is {} years old.", self.first_name, self.last_name, self.age);
+    // }
+    // fn to_string(&self) -> String {
+    //     format!("{} {} is {} years old.", self.first_name, self.last_name, self.age)
+    // }
+    // fn happy_birthday(&mut self) {
+    //     self.age += 1;
+    // }
+    // fn set_last_name(&mut self, new_last_name: &str) {
+    //     self.last_name = new_last_name.to_string();
+    // }
     fn greet(&self) {
         match self.gender {
             Gender::Male => println!("Hello Mr. {}", self.last_name),
@@ -46,7 +48,7 @@ impl Person {
 #[derive(Debug)]
 enum Gender {
     Male,
-    Female
+    Female,
 }
 
 #[derive(Debug)]
