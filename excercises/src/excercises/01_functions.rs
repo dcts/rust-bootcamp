@@ -63,10 +63,16 @@ pub fn run() {
 
     // EXCERCISE 1.E sum all numbers of an array
     println!("\n=== (E) SUM ALL NUMERS OF ARRAY ===");
+    let vec_1: Vec<i32> = vec![1,2,3,4,5];
+    println!("arr: {:?}. SUM = {}", vec_1, sum(&vec_1)); // => 15
+    let vec_2: Vec<i32> = vec![829,-12,758,2];
+    println!("arr: {:?}. SUM = {}", vec_2, sum(&vec_2)); // => 1577
 
     // EXCERCISE 1.F chunk an array into an array of arrays
+    println!("\n=== (F) CHUNK ARRAY INTO ARRAY CHUNKS ===");
 
     // EXCERCISE 1.G createDict out of array
+    println!("\n=== (G) CREATE DICT (count occurencies) ===");
 
     // EXCERCISE 1.H multiply each element by x
     println!("\n=== (H) MULTIPLY BY X ===");
@@ -177,6 +183,18 @@ fn remove_char_in_place(string: &mut String, char: char) {
     };
     *string = new_string;
 }
+/*
+ * SUM OF ARRAY NUMBERS
+ */
+fn sum(vector: &Vec<i32>) -> i32 {
+    let mut sum: i32 = 0;
+    for v in vector.iter() {
+        sum += v;
+    }
+    sum
+}
+
+
 
 /*
  * MULTIPLY ARRAY ELEMENTS BY X
