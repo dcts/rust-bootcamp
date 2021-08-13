@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 pub fn run() {
     println!("=== FUNCTIONS ===");
     // EXCERCISE 1.A reverse string
@@ -75,6 +77,10 @@ pub fn run() {
 
     // EXCERCISE 1.G createDict out of array
     println!("\n=== (G) CREATE DICT (count occurencies) ===");
+    let vector: Vec<&str> = vec!["a", "b", "a", "Hello", "hello", "Hi", "Hi", "Frankie", "Frankie"];
+    let dict: HashMap<String, i32> = create_dict(&vector);
+    println!("starting vector : {:?}", vector);
+    println!("dict <HashMap>  : {:?}", dict);
 
     // EXCERCISE 1.H multiply each element by x
     println!("\n=== (H) MULTIPLY BY X ===");
@@ -209,9 +215,26 @@ fn chunk_vector(vec: &Vec<usize>, size: usize) -> Vec<Vec<usize>> {
             indx += 1;
         }
         chunks.push(chunk.clone());
-        println!("{}", indx);
     }
     chunks
+}
+
+/*
+ * CREATE DICTIONARY OF STRING VALUES
+ * => dictionary like data structure => hashmap
+ * => key gets access to the value
+ * => HashMap Doc: https://doc.rust-lang.org/std/collections/struct.HashMap.html
+ */
+fn create_dict(string_vec: &Vec<&str>) -> HashMap<String, i32> {
+    let mut dict: HashMap<String, i32> = HashMap::new();
+    for &val in string_vec.iter() {
+        let new_count: i32 = match dict.get(val) {
+            Some(val) => val + 1,
+            None => 1,
+        };
+        dict.insert(val.to_string(), new_count);
+    }
+    dict
 }
 
 /*
