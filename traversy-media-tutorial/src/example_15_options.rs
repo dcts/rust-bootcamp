@@ -1,4 +1,6 @@
 pub fn run() {
+    println!("=== OPTIONS ===");
+
     // get an option like this
     let marrys_occupation = match get_occupation("marry") {
         Some(occupation) => occupation,
