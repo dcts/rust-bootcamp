@@ -26,6 +26,12 @@ struct Person {
     last_name: String,
     age: u8,
 }
+// you can use the struct without impl like this:
+// let p: Person = Person {
+//   first_name: "thomas",
+//   last_name: "dcts",
+//   age: 31,
+// }
 impl Person {
     fn new(first_name: &str, last_name: &str, age: u8) -> Person {
         Person {
