@@ -28,8 +28,8 @@ struct Person {
 }
 // you can use the struct without impl like this:
 // let p: Person = Person {
-//   first_name: "thomas",
-//   last_name: "dcts",
+//   first_name: String::from("thomas"),
+//   last_name: String::from("dcts"),
 //   age: 31,
 // }
 impl Person {
