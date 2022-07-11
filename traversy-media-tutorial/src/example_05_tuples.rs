@@ -12,4 +12,9 @@ pub fn run() {
     let integers = (1,2,3,4,5,6,7,8,9,10,11,12);
     println!("{:?}", (integers.0, integers.11));
     println!("{:?}", integers);
+
+    // Iterate over tuple?
+    // IMPORATNT: The type of each element of a tuple can be different,
+    // so you can't iterate over them
+    // https://stackoverflow.com/a/57640888/6272061
 }

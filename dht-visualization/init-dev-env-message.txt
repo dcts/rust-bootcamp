@@ -1,0 +1,25 @@
+
+===============================================================
+  ____  _   _ _____         _                 _ _              
+ |  _ \| | | |_   _| __   _(_)___ _   _  __ _| (_)_______ _ __ 
+ | | | | |_| | | |   \ \ / / / __| | | |/ _` | | |_  / _ \ '__|
+ | |_| |  _  | | |    \ V /| \__ \ |_| | (_| | | |/ /  __/ |   
+ |____/|_| |_| |_|     \_/ |_|___/\__,_|\__,_|_|_/___\___|_|   
+                                                               
+===============================================================
+
+Report Issues 🐛 https://github.com/dcts/rust-bootcamp/issues
+Feedback      💌 thomas@liist.com
+Donate        🙏 BTC: bc1qq5qn96ahlqjxfxz2n9l20kem8p9nsz5yzz93f7
+                 ETH: 0x3e4503720Fb8f4559Ecf64BE792b3100722dE940
+
+==== INITIALIZED VARIABLES ===
+  Dht                   : Dht object, containing nodes and allowing for querying
+  Node                  : Node object, can create posts and query the DHT
+  Post                  : Post object, includes post (text) and timestamp (number)
+  hashHex               : helper function that hashes content (string) to hexadecimal hash
+  hashInt               : helper function that hashes content (string) to large int (hex => integer)
+
+🎉🎉🎉  DEV ENVIRONMENT SUCCESSFULLY LOADED  🎉🎉🎉
+
+💪 You are amazing! 💯
