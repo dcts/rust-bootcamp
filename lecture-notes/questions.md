@@ -12,4 +12,12 @@ pub fn factorial(n: u32) -> u32 {
     return product;
 }
 ```
+### IntoIter VS Iter vs regular
 
+```rust
+let num: [u32] = []
+for num in array.into_iter() {
+    
+}
+// array.into_iter() VS without using an iterator at all 
+```
