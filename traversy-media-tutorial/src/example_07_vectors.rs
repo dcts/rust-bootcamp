@@ -29,10 +29,10 @@ pub fn run() {
     */
     println!("current vector   : {:?}", numbers);
     println!("Vector occupies  : {} bytes", mem::size_of_val(&numbers));
-    numbers.push(6);
-    numbers.push(7);
-    numbers.push(8);
-    numbers.push(9);
+    numbers.push(6);  // pushing is also mutating the vector!
+    numbers.push(7); 
+    numbers.push(8); 
+    numbers.push(9); 
     numbers.push(10);
     println!("extended vector  : {:?}", numbers);
     println!("Vector occupies  : {} bytes (after push)", mem::size_of_val(&numbers));
