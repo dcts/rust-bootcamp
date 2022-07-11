@@ -20,12 +20,19 @@ pub fn run() {
     println!("Vector length: {}", numbers.len());
 
     // vectors are stack allocated
+    // https://doc.rust-lang.org/std/vec/struct.Vec.html#guarantees
+    /*
+        "Most fundamentally, Vec is and always will be a (pointer, capacity, length) 
+        triplet. No more, no less. The order of these fields is completely 
+        unspecified, and you should use the appropriate methods to modify these. 
+        The pointer will never be null, so this type is null-pointer-optimized."
+    */
     println!("current vector   : {:?}", numbers);
     println!("Vector occupies  : {} bytes", mem::size_of_val(&numbers));
-    numbers.push(6);
-    numbers.push(7);
-    numbers.push(8);
-    numbers.push(9);
+    numbers.push(6);  // pushing is also mutating the vector!
+    numbers.push(7); 
+    numbers.push(8); 
+    numbers.push(9); 
     numbers.push(10);
     println!("extended vector  : {:?}", numbers);
     println!("Vector occupies  : {} bytes (after push)", mem::size_of_val(&numbers));
