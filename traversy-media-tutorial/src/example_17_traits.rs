@@ -1,23 +1,23 @@
 pub fn run() {
-  struct Person {
-    name: String,
-    age: usize,
-  }
+  // struct Person {
+  //   name: String,
+  //   age: usize,
+  // }
   
-  trait Getter: Person {
-    fn getname(&self) -> String { 
-      String::from(self.name)
-    } // Limitation: you can only implement functions that are ignorant of what type they're being blended into
-  }
+  // trait Getter {
+  //   fn getname(&self) -> String { 
+  //     String::from(self.name)
+  //   } // Limitation: you can only implement functions that are ignorant of what type they're being blended into
+  // }
   
-  impl Getter for Person {}
+  // impl Getter for Person {}
   
-  let p = Person {
-    name: String::from("Ryan"),
-    age: 41,
-  };
+  // let p = Person {
+  //   name: String::from("Ryan"),
+  //   age: 41,
+  // };
   
-  println!("person : {}", p.getname());
+  // println!("person : {}", p.getname());
 }
 
 
