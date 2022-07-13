@@ -11,3 +11,4 @@
   - [ ] write map function and compare to map() that expects closure
   - [ ] 
 - [ ] dive deep into iterator type
+- [ ] Options VS Results
