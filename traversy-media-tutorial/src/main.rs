@@ -5,7 +5,7 @@
 // mod example_04_strings;
 // mod example_05_tuples;
 // mod example_06_arrays;
-mod example_07_vectors;
+// mod example_07_vectors;
 // mod example_08_conditionals;
 // mod example_09_loops;
 // mod example_10_functions;
@@ -14,6 +14,8 @@ mod example_07_vectors;
 // mod example_13_enums;
 // mod example_14_cli;
 // mod example_15_options;
+// mod example_16_hashmaps;
+mod example_17_traits;
 
 fn main() {
     // testing::run();
@@ -23,7 +25,7 @@ fn main() {
     // example_04_strings::run();
     // example_05_tuples::run();
     // example_06_arrays::run();
-    example_07_vectors::run();
+    // example_07_vectors::run();
     // example_08_conditionals::run();
     // example_09_loops::run();
     // example_10_functions::run();
@@ -32,5 +34,7 @@ fn main() {
     // example_13_enums::run();
     // example_14_cli::run();
     // example_15_options::run();
+    // example_16_hashmaps::run();
+    example_17_traits::run();
 }
 
