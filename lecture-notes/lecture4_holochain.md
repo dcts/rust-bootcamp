@@ -10,7 +10,6 @@
 # Actions
 - always public
 - published to source chain AND the shared DHT space
-- actions can attach entries (or not)
 
 # Entries
 - may be private or public
@@ -35,7 +34,7 @@
 # Agent
 - has an Agend ID
 - Agent is basically a identity
-- (TO CLAIRFY)one peson could have multiple Agents if they chose to
+- (TO CLAIRFY) one peson could have multiple Agents if they chose to
 
 # Cell
 - instance of a DNA
