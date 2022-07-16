@@ -12,3 +12,5 @@
   - [ ] 
 - [ ] dive deep into iterator type
 - [ ] Options VS Results
+
+- [ ] If you published api keys to github: do locally rebase, then git force push

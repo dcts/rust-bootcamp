@@ -37,7 +37,8 @@
 - (TO CLAIRFY) one peson could have multiple Agents if they chose to
 
 # Cell
-- instance of a DNA
+- instance of a DNA + Agent_Id
+- membrane analogy => carefull, its not accurate
 
 # DNA
 - hApp integrity code (the part the is being hashes)
