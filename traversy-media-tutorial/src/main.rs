@@ -15,6 +15,7 @@ mod example_12_structs;
 mod example_13_enums;
 mod example_14_cli;
 mod example_15_options;
+mod example_15b_results;
 mod example_16_hashmap;
 mod example_17_traits;
 mod example_18_matching;
@@ -22,7 +23,8 @@ mod example_18_matching;
 fn main() {
     let args: Vec<String> = env::args().collect();
     let run_argument = args.get(1);
-
+    let error_hint = "Please run `cargo run ARGUMENT`\n  e.g. cargo run loops\n  e.g. cargo run functions".to_string();
+    
     match run_argument {
         Some(string) => {
             match string.as_str() {
@@ -41,13 +43,14 @@ fn main() {
                 "enums" => example_13_enums::run(),
                 "cli" => example_14_cli::run(),
                 "options" => example_15_options::run(),
+                "results" => example_15b_results::run(),
                 "hashmap" => example_16_hashmap::run(),
                 "traits" => example_17_traits::run(),
                 "matching" => example_18_matching::run(),
-                _ => println!("❌ invalid argument: {} ", string.as_str()),
+                _ => println!("❌ invalid argument: {} ", &error_hint),
             }
         },
-        None => println!("❌ argument missing. Please run `cargo run ARGUMENT`\n  e.g. cargo run loops\n  e.g. cargo run functions"),
+        None => println!("❌ argument missing. {}", &error_hint),
     }
 }
 

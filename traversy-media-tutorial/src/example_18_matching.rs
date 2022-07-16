@@ -7,6 +7,12 @@ pub fn run() {
 
     // Matching Enums (inline)
     let dir: Direction = Direction::Down;
+    let u = Direction::Up;
+    let d = Direction::Down;
+    let l = Direction::Left;
+    let r = Direction::Right;
+    println!("u={:?}\nd={:?}\nl={:?}\nr={:?}", u, d, l, r);
+
     match dir {
         Direction::Right => println!("moving right"), // comma required
         Direction::Left => println!("moving left"),   // comma required
@@ -26,13 +32,14 @@ pub fn run() {
         }
     }
 
-    // // Match can return something
-    // let match_result = match dir {
-    //     Direction::Right => "right",
-    //     Direction::Left => "left",
-    //     Direction::Up => "up",
-    //     Direction::Down => "down",
-    // }; // semicolon here since this is an expression
+    // Match can return something
+    let match_result = match dir {
+        Direction::Right => "right",
+        Direction::Left => "left",
+        Direction::Up => "up",
+        Direction::Down => "down",
+    }; // semicolon here since this is an expression
+    println!("{}", match_result);
 
     // // MATCHING OVER OTHER VARIABLE TYPES
     // // boolean
@@ -130,11 +137,12 @@ pub fn run() {
     //     _ => println!("nonmatching string literal. Please use an enum next time! ;)"),
     // }
 }
-
-enum Symbol {
-    Heart,
-    Cross,
-}
+// #[derive(Debug)]
+// enum Symbol {
+//     Heart,
+//     Cross,
+// }
+#[derive(Debug)]
 enum Direction {
     Up,
     Down,
