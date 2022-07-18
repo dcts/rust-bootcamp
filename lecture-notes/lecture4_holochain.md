@@ -56,6 +56,8 @@
 // Fn     : agent_info() => 
 // Fn     : zome_info() => 
 // Fn     : create_entry() => 
+// Fn     : get_links() => return only undeleted links
+// Fn     : get_link_details() => return also deleted links
 // Struct : EntryType
 // Struct : AgentPubKey
 // Result : ExternResult
